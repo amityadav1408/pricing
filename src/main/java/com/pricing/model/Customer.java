@@ -3,8 +3,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,52 +11,44 @@ import javax.persistence.Table;
 public class Customer implements Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6696923375435314436L;
+
 	@Id
-	@GeneratedValue(strategy 
-			= GenerationType.AUTO)
-	private Integer id;
-
 	@Column(name ="cust_id")
-	private String custId;
-	
-	@Column(name ="acct_number")
-	private String acctNumber;
-	
-	@Column(name ="pricing")
-	private String pricing;
+	private Long custId;
 
-	public Integer getId() {
-		return id;
-	}
+	@Column(name ="glob_cust_id")
+	private String globCustId;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	@Column(name ="cust_name")
+	private String custName;
 
-	public String getCustId() {
+	public Long getCustId() {
 		return custId;
 	}
 
-	public void setCustId(String custId) {
+	public void setCustId(Long custId) {
 		this.custId = custId;
 	}
 
-	public String getAcctNumber() {
-		return acctNumber;
+	public String getGlobCustId() {
+		return globCustId;
 	}
 
-	public void setAcctNumber(String acctNumber) {
-		this.acctNumber = acctNumber;
+	public void setGlobCustId(String globCustId) {
+		this.globCustId = globCustId;
 	}
 
-	public String getPricing() {
-		return pricing;
+	public String getCustName() {
+		return custName;
 	}
 
-	public void setPricing(String pricing) {
-		this.pricing = pricing;
+	public void setCustName(String custName) {
+		this.custName = custName;
 	}
 
 
-	
 }
