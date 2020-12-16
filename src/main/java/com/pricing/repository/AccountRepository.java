@@ -11,8 +11,8 @@ import com.pricing.model.Account;
 public interface AccountRepository extends JpaRepository<Account , Long>{
 
 	
-	  @Query("select a from Acccount a where a.acctNumber =: acctNumber")
-	  List<Account> findByAcctNum(@Param("acctNumber") String acctNumber);
+	  @Query("select a.acctId from Acccount a where a.acctNumber =: acctNumber")
+	  Long  findByAcctNum(@Param("acctNumber") String acctNumber);
 	  
 
 }

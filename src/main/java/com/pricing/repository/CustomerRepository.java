@@ -11,8 +11,8 @@ import com.pricing.model.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer , Long>{
 
-	@Query("select a from Customer a where a.glob_cust_id =: glbCustId")
-	  List<Customer> findByCustId(@Param("glbCustId") String glbCustId);
+	@Query("select a.custId from Customer a where a.globCustId =: globCustId")
+	  Long findByCustId(@Param("globCustId") String globCustId);
 
 }
 

@@ -12,8 +12,8 @@ import com.pricing.model.CustPrdtPriceRel;
 public interface CustPrdtPriceRelRepository extends JpaRepository<CustPrdtPriceRel , Long>{
 
 
-	@Query("select a from CustPrdtPriceRel a where a.glob_cud_id =: glbCustId")
-	  List<CustPrdtPriceRel> findByCustId(@Param("glbCustId") String glbCustId);
+	@Query("select a.prdtId from CustPrdtPriceRel a where a.customer.custId =: custId")
+	  Long  findByCustId(@Param("custId") Long custId);
 }
 
 

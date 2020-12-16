@@ -1,9 +1,15 @@
 package com.pricing.model;
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +31,13 @@ public class Customer implements Serializable{
 
 	@Column(name ="cust_name")
 	private String custName;
+
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Account", 
+		joinColumns = { @JoinColumn(name = "custId", referencedColumnName = "custId")})
+	@MapKey(name = "custId")
+	private List<Account> acctList;
 
 	public Long getCustId() {
 		return custId;

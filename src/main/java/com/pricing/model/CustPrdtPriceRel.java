@@ -1,10 +1,17 @@
 package com.pricing.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,11 +26,22 @@ public class CustPrdtPriceRel implements Serializable{
 	@Column(name ="cust_prdt_pric_rel_id")
 	private Long custPrdtPricRelId;
 	
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+			)
 	@Column(name ="cust_id")
-	private Long custId;
+	private Customer customer;
 	
 	@Column(name ="prdt_id")
 	private Long prdtId;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Customer", 
+		joinColumns = { @JoinColumn(name = "custId", referencedColumnName = "customer")})
+	@MapKey(name = "custId")
+	private List<ProductPricing> productList;
 
 	public Long getCustPrdtPricRelId() {
 		return custPrdtPricRelId;
@@ -33,12 +51,14 @@ public class CustPrdtPriceRel implements Serializable{
 		this.custPrdtPricRelId = custPrdtPricRelId;
 	}
 
-	public Long getCustId() {
-		return custId;
+	
+
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustId(Long custId) {
-		this.custId = custId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Long getPrdtId() {

@@ -23,38 +23,52 @@ public class PricingServiceImpl implements PricingService{
 
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	@Autowired
 	AccountRepository accountRepository;
-	
+
 	@Autowired
 	ProductPricingRepository pricingRepository;
-	
+
 	@Autowired
 	AcctPrdtPriceRelRepository acctPrdtPriceRelRepository;
-	
+
 	@Autowired
 	CustPrdtPriceRelRepository custPrdtPriceRelRepository;
-	
-	
 
-	public PricingDto getPrice(String glbCustId, String acctNumber) {
+
+
+	public PricingDto getPrice(String globCustId, String acctNumber) {
 		PricingDto pricingDto = new PricingDto();
-		String custId = null;
-		String acctId = null;
-		 
-		List<Customer> custList = new ArrayList<>();
-		List<Account> acctList = new ArrayList<>();
-		List<AcctPrdtPriceRel> acctPrdctPriceList = new ArrayList<>();
-		List<CustPrdtPriceRel> custPrdctPriceList = new ArrayList<>();
-		List<ProductPricing> priceList = new ArrayList<>();
-		
-		custList = customerRepository.findByCustId(glbCustId);
-		acctList =	accountRepository.findByAcctNum(acctNumber);
-		
-		acctPrdctPriceList = acctPrdtPriceRelRepository.findByAcctId(acctId);
-		custPrdctPriceList = custPrdtPriceRelRepository.findByCustId(custId);
-				
+
+
+
+
+		if(acctNumber == null) {
+			List<ProductPricing> custPriceList = new ArrayList<>();
+
+			Long custId = customerRepository.findByCustId(globCustId);
+
+			Long custPrdctId = custPrdtPriceRelRepository.findByCustId(custId);
+
+			custPriceList = pricingRepository.findByPrdtId(custPrdctId);
+
+		}else {
+			List<ProductPricing> acctPriceList = new ArrayList<>();
+
+			Long acctId =	accountRepository.findByAcctNum(acctNumber);
+
+			Long acctPrdctId = acctPrdtPriceRelRepository.findByAcctId(acctId);
+
+			acctPriceList = pricingRepository.findByPrdtId(acctPrdctId);
+
+
+
+		}
+
+
+
+
 		return pricingDto ;
 	}
 }

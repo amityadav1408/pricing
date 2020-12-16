@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,9 +21,11 @@ public class AcctPrdtPriceRel implements Serializable{
 	@Column(name ="acct_prdt_pric_rel_id")
 	private Long acctPrdtPricRelId;
 	
+	@OneToOne
 	@Column(name ="acct_id")
 	private Long acctId;
 	
+	@OneToOne
 	@Column(name ="prdt_id")
 	private Long prdtId;
 

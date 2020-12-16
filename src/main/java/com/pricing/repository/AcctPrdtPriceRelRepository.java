@@ -12,8 +12,8 @@ import com.pricing.model.AcctPrdtPriceRel;
 
 public interface AcctPrdtPriceRelRepository extends JpaRepository<AcctPrdtPriceRel , Long>{
 
-	@Query("select a from AcctPrdtPriceRel a where a.acct_Id =: acctId")
-	  List<AcctPrdtPriceRel> findByAcctId(@Param("acctId") String acctId);
+	@Query("select a.prdtId from AcctPrdtPriceRel a where a.account.acctId =: acctId")
+	  Long  findByAcctId(@Param("acctId") Long acctId);
 }
 
 
