@@ -20,7 +20,7 @@ public class Account implements Serializable{
 	private Long acctId;
 	
 	@Column(name ="acct_num")
-	private String acctNum;
+	private String acctNumber;
 	
 	@Column(name ="cust_id")
 	private String custId;
@@ -34,11 +34,11 @@ public class Account implements Serializable{
 	}
 
 	public String getAcctNum() {
-		return acctNum;
+		return acctNumber;
 	}
 
 	public void setAcctNum(String acctNum) {
-		this.acctNum = acctNum;
+		this.acctNumber = acctNum;
 	}
 
 	public String getCustId() {

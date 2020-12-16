@@ -14,12 +14,12 @@ public class PricingControllerImpl implements PricingController{
 	@Autowired
 	private PricingService pricingService;
 	
-	public ResponseEntity<PricingDto> getPrice(@RequestParam(required = false) String custId,
+	public ResponseEntity<PricingDto> getPrice(@RequestParam(required = false) String glbCustId,
 			@RequestParam(required = false) String acctNumber){
 		
 		PricingDto pricingDto = null;
 		
-		pricingDto = pricingService.getPrice(custId, acctNumber);
+		pricingDto = pricingService.getPrice(glbCustId, acctNumber);
 		
 		return ResponseEntity.ok(pricingDto);
 		

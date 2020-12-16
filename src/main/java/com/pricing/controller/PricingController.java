@@ -17,7 +17,7 @@ public interface PricingController {
 
 	@GetMapping("/pricing")
 	ResponseEntity<PricingDto> getPrice(
-			@RequestParam(required = false) String custId,
+			@RequestParam(required = false) String glbCustId,
 			@RequestParam(required = false) String acctNumber);
 
 
