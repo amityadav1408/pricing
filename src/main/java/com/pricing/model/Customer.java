@@ -1,4 +1,5 @@
 package com.pricing.model;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,8 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer implements Serializable{
-
+public class Customer implements Serializable {
 
 	/**
 	 * 
@@ -24,26 +24,21 @@ public class Customer implements Serializable{
 	private static final long serialVersionUID = 6696923375435314436L;
 
 	@Id
-	@Column(name ="cust_id")
+	@Column(name = "cust_id")
 	private Long custId;
 
-	@Column(name ="glob_cust_id")
+	@Column(name = "glob_cust_id")
 	private String globCustId;
 
-	@Column(name ="cust_name")
+	@Column(name = "cust_name")
 	private String custName;
 
-	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="cust_prdt_pric_rel", joinColumns = @JoinColumn(name="cust_id"),
-	inverseJoinColumns = @JoinColumn(name="prdt_id"))
+	@JoinTable(name = "cust_prdt_pric_rel", joinColumns = @JoinColumn(name = "cust_id"), inverseJoinColumns = @JoinColumn(name = "prdt_id"))
 	private ProductPricing prdctPricing;
-	
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "account", 
-		joinColumns =  @JoinColumn(name = "cust_id"), inverseJoinColumns = @JoinColumn(name = "acct_id"))
+	@JoinTable(name = "account", joinColumns = @JoinColumn(name = "cust_id"), inverseJoinColumns = @JoinColumn(name = "acct_id"))
 	@MapKey(name = "custId")
 	private List<Account> acctList;
 
@@ -87,5 +82,4 @@ public class Customer implements Serializable{
 		this.acctList = acctList;
 	}
 
-	
 }

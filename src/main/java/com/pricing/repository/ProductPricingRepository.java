@@ -12,6 +12,11 @@ public interface ProductPricingRepository extends JpaRepository<ProductPricing ,
 
 	@Query("select a from ProductPricing a where a.productId = :productId")
 	  List<ProductPricing> findByPrdtId(@Param("productId") Long productId);
+	
+	@Query("select a from ProductPricing a where a.productId IN :productIdList")
+	  List<ProductPricing> findByProductIds(@Param("productIdList") List<Long> productIdList);
+	
+	
 }
 
 

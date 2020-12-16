@@ -15,7 +15,7 @@ public interface AccountRepository extends JpaRepository<Account , Long>{
 	
 	
 	  @Query("select a from Account a where a.acctNumber = :acctNumber")
-	  Account findByAcctNumber(@Param("acctNumber") String acctNumber);
+	  List<Account> findByAcctNumber(@Param("acctNumber") String acctNumber);
 	  
 	 
 	
