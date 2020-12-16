@@ -2,9 +2,13 @@ package com.pricing.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +43,16 @@ public class ProductPricing implements Serializable{
 	
 	@Column(name ="price")
 	private double price;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="customer", joinColumns = @JoinColumn(name="prdt_id"),
+	inverseJoinColumns = @JoinColumn(name="cust_id"))
+	private Customer customer;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="account", joinColumns = @JoinColumn(name="prdt_id"),
+	inverseJoinColumns = @JoinColumn(name="acct_id"))
+	private Account account;
 
 	public Long getProductId() {
 		return productId;

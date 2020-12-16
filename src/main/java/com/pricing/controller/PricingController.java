@@ -1,6 +1,8 @@
 package com.pricing.controller;
 
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +13,11 @@ import com.pricing.dto.PricingDto;
 
 
 @RestController
-@RequestMapping(value = "/")
 public interface PricingController {
 
 
 	@GetMapping("/pricing")
-	ResponseEntity<PricingDto> getPrice(
+	ResponseEntity<List<PricingDto>> getPrice(
 			@RequestParam(required = false) String glbCustId,
 			@RequestParam(required = false) String acctNumber);
 

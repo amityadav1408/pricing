@@ -1,4 +1,6 @@
 package com.pricing.repository;
+
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,9 +13,13 @@ import com.pricing.model.Account;
 public interface AccountRepository extends JpaRepository<Account , Long>{
 
 	
-	  @Query("select a.acctId from Acccount a where a.acctNumber =: acctNumber")
-	  Long  findByAcctNum(@Param("acctNumber") String acctNumber);
+	
+	  @Query("select a from Account a where a.acctNumber = :acctNumber")
+	  Account findByAcctNumber(@Param("acctNumber") String acctNumber);
 	  
+	 
+	
+	
 
 }
 

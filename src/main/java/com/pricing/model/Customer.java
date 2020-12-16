@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,10 +33,17 @@ public class Customer implements Serializable{
 	@Column(name ="cust_name")
 	private String custName;
 
-
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="cust_prdt_pric_rel", joinColumns = @JoinColumn(name="cust_id"),
+	inverseJoinColumns = @JoinColumn(name="prdt_id"))
+	private ProductPricing prdctPricing;
+	
+	
+	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Account", 
-		joinColumns = { @JoinColumn(name = "custId", referencedColumnName = "custId")})
+	@JoinTable(name = "account", 
+		joinColumns =  @JoinColumn(name = "cust_id"), inverseJoinColumns = @JoinColumn(name = "acct_id"))
 	@MapKey(name = "custId")
 	private List<Account> acctList;
 
@@ -63,5 +71,21 @@ public class Customer implements Serializable{
 		this.custName = custName;
 	}
 
+	public ProductPricing getPrdctPricing() {
+		return prdctPricing;
+	}
 
+	public void setPrdctPricing(ProductPricing prdctPricing) {
+		this.prdctPricing = prdctPricing;
+	}
+
+	public List<Account> getAcctList() {
+		return acctList;
+	}
+
+	public void setAcctList(List<Account> acctList) {
+		this.acctList = acctList;
+	}
+
+	
 }

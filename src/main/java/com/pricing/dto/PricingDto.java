@@ -42,6 +42,24 @@ public class PricingDto implements Serializable{
 	@JsonProperty("price")
 	private String price;
 
+	public PricingDto() {
+		
+	}
+	
+	public PricingDto(String globCustId, String acctNumber, String prdctCd, String prdctDesc, String prdctGrp,
+			String prdctCtgry, String pricingCcy, String pricingType, String price) {
+		super();
+		this.globCustId = globCustId;
+		this.acctNumber = acctNumber;
+		this.prdctCd = prdctCd;
+		this.prdctDesc = prdctDesc;
+		this.prdctGrp = prdctGrp;
+		this.prdctCtgry = prdctCtgry;
+		this.pricingCcy = pricingCcy;
+		this.pricingType = pricingType;
+		this.price = price;
+	}
+
 	public String getGlobCustId() {
 		return globCustId;
 	}

@@ -1,5 +1,8 @@
 package com.pricing.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,10 +17,10 @@ public class PricingControllerImpl implements PricingController{
 	@Autowired
 	private PricingService pricingService;
 	
-	public ResponseEntity<PricingDto> getPrice(@RequestParam(required = false) String glbCustId,
+	public ResponseEntity<List<PricingDto>> getPrice(@RequestParam(required = false) String glbCustId,
 			@RequestParam(required = false) String acctNumber){
 		
-		PricingDto pricingDto = null;
+		List<PricingDto> pricingDto = new ArrayList<>();
 		
 		pricingDto = pricingService.getPrice(glbCustId, acctNumber);
 		
