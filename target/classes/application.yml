@@ -1,0 +1,7 @@
+--- 
+spring: 
+  datasource: 
+    password: root
+    url: "jdbc:mysql://34.105.221.119:3306/pricing_database?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+    usernasme: root
+  profiles: production
