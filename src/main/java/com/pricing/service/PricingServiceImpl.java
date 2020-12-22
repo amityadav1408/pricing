@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -52,16 +53,19 @@ public class PricingServiceImpl implements PricingService {
 		if (globCustId != null) {
 			List<ProductPricing> custPriceList = new ArrayList<>();
 
-			List<Customer> customer = customerRepository.findByCustId(globCustId);
+			List<Customer> customer = customerRepository.findByCustId(globCustId,PageRequest.of(0,50));
 
 			if(customer.isEmpty())
 				return null;
+			
+			
+			System.out.println("CUSTOMER OBJECT SIZE:::::"+customer.size());
 			// Long custPrdctId = customer.getPrdcFtPricing().getProductId();
 			List<CustPrdtPriceRel> customerPrdPrceRealtionList = custPrdPriceRelRepository
-					.findByCustomerId(customer.stream().map(Customer::getCustId).collect(Collectors.toList()));
-
+					.findByCustomerId(customer.stream().map(Customer::getCustId).collect(Collectors.toList()),PageRequest.of(0,50));
+            System.out.println("customerPrdPrceRealtionList::::::"+customerPrdPrceRealtionList.size());
 			for (CustPrdtPriceRel custPrdtPriceRel : customerPrdPrceRealtionList) {
-				custPriceList = pricingRepository.findByPrdtId(custPrdtPriceRel.getPrdtId());
+				custPriceList = pricingRepository.findByPrdtId(custPrdtPriceRel.getPrdtId(),PageRequest.of(0,1));
 				for (ProductPricing productPricing : custPriceList) {
 					PricingDto p = new PricingDto(globCustId,
 							customer.get(0)!=null	&& customer.get(0).getAcctList()!=null && customer.get(0).getAcctList().get(0).getAcctNumber()!=null?customer.get(0).getAcctList().get(0).getAcctNumber():null, productPricing.getProductCd(),
@@ -78,16 +82,17 @@ public class PricingServiceImpl implements PricingService {
 
 			List<ProductPricing> acctPriceList = new ArrayList<>();
 
-			List<Account> account = accountRepository.findByAcctNumber(acctNumber);
+			List<Account> account = accountRepository.findByAcctNumber(acctNumber,PageRequest.of(0,100));
+			System.out.println("ACCOUNT SIZ:::::"+account.size());
 
 			List<AcctPrdtPriceRel> acctProdPriceRelList = acctPrdPriceRelRepository
-					.findbyAcctId(account.stream().map(Account::getAcctId).collect(Collectors.toList()));
+					.findbyAcctId(account.stream().map(Account::getAcctId).collect(Collectors.toList()),PageRequest.of(0,100));
 			
 			List<Long> prodIdList = acctProdPriceRelList.stream().map(AcctPrdtPriceRel::getPrdtId)
 					.collect(Collectors.toList());
 
 			// acctPriceList = pricingRepository.findByPrdtId(prodIdList);
-			acctPriceList = pricingRepository.findByProductIds(prodIdList);
+			acctPriceList = pricingRepository.findByProductIds(prodIdList,PageRequest.of(0,100));
 			for (ProductPricing productPricing : acctPriceList) {
 				PricingDto p = new PricingDto(null, acctNumber, productPricing.getProductCd(),
 						productPricing.getProductDesc(), productPricing.getProductGroup(),
@@ -98,7 +103,14 @@ public class PricingServiceImpl implements PricingService {
 
 			return pricingDtoList;
 
-		} else {
+		}else if (globCustId != null && acctNumber != null )
+		{
+			System.out.println("TODO");
+			return pricingDtoList;
+		}
+		
+		
+		else {
 
 			List<Customer> cust = customerRepository.findAll();
 

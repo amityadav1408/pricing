@@ -2,6 +2,7 @@ package com.pricing.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +16,6 @@ public interface AcctPrdPriceRelRepository extends JpaRepository<AcctPrdtPriceRe
 	Customer findByCustId(@Param("globCustId") String globCustId);
 
 	@Query("select a from AcctPrdtPriceRel a where a.acctId IN :acctIdList")
-	List<AcctPrdtPriceRel> findbyAcctId(@Param("acctIdList") List<Long> acctIdList);
+	List<AcctPrdtPriceRel> findbyAcctId(@Param("acctIdList") List<Long> acctIdList, Pageable pageable);
 
 }
