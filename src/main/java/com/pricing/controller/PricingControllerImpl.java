@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pricing.dto.PricingDto;
 import com.pricing.service.PricingService;
 
+@CrossOrigin
 @RestController
 public class PricingControllerImpl implements PricingController{
 
